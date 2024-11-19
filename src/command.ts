@@ -6,6 +6,9 @@ export function apply(ctx: Context) {
     .command("build <邮箱> <源码地址>")
     .alias("构建")
     .action(async ({ session }, email, url) => {
+      if (!email || !url) {
+        return h.at(session.userId) + "\r/build 邮箱 源码地址";
+      }
       let emailregex: RegExp =
         /^\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}$/;
       if (!emailregex.test(email)) {
